@@ -7,7 +7,7 @@
 int UARTInit();
 void UARTClean(int uartFile);
 int sendByte(int uartFile);
-int receiveByte(int uartFile);
+void receiveByte(int uartFile);
 
 int UARTInit(){
     int uartFile = -1;
@@ -73,54 +73,60 @@ int sendByte(int uartFile){
 	if (uartFile != -1){
 
 		int count = write(uartFile, &tx_buffer[0], (p_tx_buffer - &tx_buffer[0]));		//Filestream, bytes to write, number of bytes to write
-
+		printf("Data : %s\n",&tx_buffer);
+		printf("Data send ? : %i\n",count);
 		if (count < 0){
 
 			printf("UART TX error\n");
             return -1;
 		}
         else{
-
             return 0;
         }
 	}
+
     else{
         printf("UART TX error\n");
         return -1;
     }
 }
 
-int receiveByte(int uartFile){
-    if (uartFile != -1){
-
+void receiveByte(int uartFile){
+	printf("UART file ? : %i\n",uartFile);
+   //----- CHECK FOR ANY RX BYTES -----
+	if (uartFile != -1)
+	{
 		// Read up to 255 characters from the port if they are there
 		unsigned char rx_buffer[256];
-		int rx_length = read(uartFile, (void*)rx_buffer, 255);		//Filestream, buffer to store in, number of bytes to read (max)
+		int rx_length = 0;
+		while(rx_length == 0){
+			rx_length = read(uartFile, (void*)rx_buffer, 255);
+		}
 
+		printf("Rx_length : %i\n",rx_length);
 		if (rx_length < 0)
 		{
-			return -1;//An error occured (will occur if there are no bytes)
-		}
-		else if (rx_length == 0)
-		{
-			return -1;//No data waiting
+			//An error occured (will occur if there are no bytes)
 		}
 		else
 		{
 			//Bytes received
 			rx_buffer[rx_length] = '\0';
 			printf("%i bytes read : %s\n", rx_length, rx_buffer);
-            return 0;
 		}
 	}
 }
 
 int main(){
     int uartFile = -1;
+    int debug = 100;
     uartFile = UARTInit();
     sendByte(uartFile);
-    while(receiveByte(uartFile) != -1){ 
-    }
+	receiveByte(uartFile);
+    /*while(receiveByte(uartFile) != -1 | receiveByte(uartFile) != 2){
+	  debug = receiveByte(uartFile);
+	  printf("boucle while : %s\n",debug); 
+    }*/
     UARTClean(uartFile);
-    printf("/nprogram finish/n");
+    printf("program finish\n");
 }
