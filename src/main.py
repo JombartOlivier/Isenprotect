@@ -2,16 +2,10 @@
 # -*- coding: utf-8 -*-
 #
 
-import SigfoxCom.py
+import SigfoxCom
 import serial
 
-a = SigfoxCom
-a.baudRate = 9600
-baud = a.baudRate
-print "baude rate", baud, "\n"
-a.port = "/dev/ttyAMA0"
-print "port", a.port, "\n"
-a.timeOut = 2
-print "time out", a.timeOut, "\n"
-a.openUartPort(a.port, a.baudRate, a.timeOut)
-
+a = SigfoxCom.Sigfox
+print (dir(a))
+a.openUartPort(a, "/dev/ttyAMA0", 9600, 2)
+a.closeUartPort(a)
