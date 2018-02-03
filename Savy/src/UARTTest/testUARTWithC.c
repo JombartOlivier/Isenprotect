@@ -3,11 +3,12 @@
 #include <fcntl.h>			//Used for UART
 #include <termios.h>		//Used for UART
 #include <ncurses.h>
+#include <string.h>
 
 int UARTInit();
 void UARTClean(int uartFile);
-int sendByte(int uartFile);
-void receiveByte(int uartFile);
+int sendByte(int uartFile, unsigned char* buffer, int bufferLength);
+unsigned char receiveByte(int uartFile);
 
 int UARTInit(){
     int uartFile = -1;
@@ -25,7 +26,7 @@ int UARTInit(){
         //
         //	O_NOCTTY - When set and path identifies a terminal device, open() shall not cause the terminal device to become the controlling terminal for the process.
 
-	uartFile = open("/dev/ttyAMA0", O_RDWR | O_NOCTTY | O_NDELAY);		//Open in non blocking read/write mode
+	uartFile = open("/dev/ttyAMA0", O_RDWR | O_NOCTTY | O_NONBLOCK);		//Open in non blocking read/write mode
 	if (uartFile == -1)
 	{
 		//ERROR - CAN'T OPEN SERIAL PORT
@@ -45,7 +46,7 @@ int UARTInit(){
 
 	struct termios options;
 	tcgetattr(uartFile, &options);
-	options.c_cflag = B9600 | CS8 | CLOCAL | CREAD;		//<Set baud rate
+	options.c_cflag = B115200 | CS8 | CLOCAL | CREAD;		//<Set baud rate
 	options.c_iflag = IGNPAR;
 	options.c_oflag = 0;
 	options.c_lflag = 0;
@@ -58,23 +59,13 @@ void UARTClean(int uartFile){
     close(uartFile);
 }
 
-int sendByte(int uartFile){
-
-    unsigned char tx_buffer[20];
-	unsigned char *p_tx_buffer;
-	
-	p_tx_buffer = &tx_buffer[0];
-	*p_tx_buffer++ = 'H';
-	*p_tx_buffer++ = 'e';
-	*p_tx_buffer++ = 'l';
-	*p_tx_buffer++ = 'l';
-	*p_tx_buffer++ = 'o';
+int sendByte(int uartFile, unsigned char* buffer, int bufferLength){
 	
 	if (uartFile != -1){
 
-		int count = write(uartFile, &tx_buffer[0], (p_tx_buffer - &tx_buffer[0]));		//Filestream, bytes to write, number of bytes to write
-		printf("Data : %s\n",&tx_buffer);
-		printf("Data send ? : %i\n",count);
+		int count = write(uartFile, buffer, bufferLength);		//Filestream, bytes to write, number of bytes to write
+		printf("Data : %s\n", buffer);
+		printf("Data send ? : %i\n", count);
 		if (count < 0){
 
 			printf("UART TX error\n");
@@ -91,7 +82,7 @@ int sendByte(int uartFile){
     }
 }
 
-void receiveByte(int uartFile){
+unsigned char receiveByte(int uartFile){
 	printf("UART file ? : %i\n",uartFile);
    //----- CHECK FOR ANY RX BYTES -----
 	if (uartFile != -1)
@@ -113,16 +104,35 @@ void receiveByte(int uartFile){
 			//Bytes received
 			rx_buffer[rx_length] = '\0';
 			printf("%i bytes read : %s\n", rx_length, rx_buffer);
-		}
+			return rx_buffer;		}
 	}
 }
 
 int main(){
     int uartFile = -1;
-    int debug = 100;
+	//unsigned char tx_buffer[20];
+	unsigned char p_tx_buffer[6];
+	unsigned char rxBuffer;
+	/*p_tx_buffer = &tx_buffer[0];
+	*p_tx_buffer++ = 'H';
+	*p_tx_buffer++ = 'e';
+	*p_tx_buffer++ = 'l';
+	*p_tx_buffer++ = 'l';
+	*p_tx_buffer++ = 'o';*/
+	p_tx_buffer[0] = '1';
+	p_tx_buffer[1] = '2';
+	p_tx_buffer[2] = '3';
+	p_tx_buffer[3] = '4';
+	p_tx_buffer[4] = '5';
+	p_tx_buffer[5] = '6';
     uartFile = UARTInit();
-    sendByte(uartFile);
-	receiveByte(uartFile);
+    sendByte(uartFile, p_tx_buffer, 6);
+    rxBuffer = receiveByte(uartFile);
+	printf('data : %s\n', rxBuffer);
+	/*while(&rxBuffer != '/0'){
+		printf('data : %c\n', &rxBuffer);
+		*rxBuffer++;
+	}*/
     /*while(receiveByte(uartFile) != -1 | receiveByte(uartFile) != 2){
 	  debug = receiveByte(uartFile);
 	  printf("boucle while : %s\n",debug); 
