@@ -56,22 +56,45 @@ class Sigfox:
 
         self.serialPort = serial.Serial(self.port, self.baudRate, timeout = self.timeOut)
 
-    def closeUartPort(a):
+    def closeUartPort(self):
         self.serialPort.close()
 
-    def wakeUpSigfox(self)
+    def wakeUpSigfox(self):
 
-        self.serialPort.write(0xff)
-        self.serialPort.write(0xff)
-        self.serialPort.write(0xff)
-        self.serialPort.write(0xff)
-        self.serialPort.write(0xff)
-        self.serialPort.write('A')
-        self.serialPort.write('T')
-        self.serialPort.write('$')
-        self.serialPort.write('S')
-        self.serialPort.write('F')
-        self.serialPort.write('=')
+        charToSend = ['A','T','$','S','F','=']
+        charToByte = list()
+        i = 0
+
+        while i < len(charToSend):
+            print("start : ", i, charToSend[i])
+            if type(charToSend[i]) is int:
+                temp = charToSend[i]
+                temp = bytes(temp)                
+                charToByte.append(temp)
+                print("if : ", temp)
+            else:
+                temp1 = charToSend[i]
+                temp1 = temp1.encode()
+                charToByte.append(temp1)
+                print("else", temp1)
+
+            i = i+1     
+
+        print("char To Send : ", charToSend)
+        print("char To Byte : ", charToByte )
+        print("taille", len(charToByte))
+
+        self.serialPort.write(b'\xff')
+        self.serialPort.write(b'\xff')
+        self.serialPort.write(b'\xff')
+        self.serialPort.write(b'\xff')
+        self.serialPort.write(b'\xff')
+        self.serialPort.write(charToByte[1])
+        self.serialPort.write(charToByte[2])
+        self.serialPort.write(charToByte[3])
+        self.serialPort.write(charToByte[4])
+        self.serialPort.write(charToByte[5])
+        self.serialPort.write(charToByte[6])
 
 
        
