@@ -66,17 +66,12 @@ class Sigfox:
         i = 0
 
         while i < len(charToSend):
+
             print("start : ", i, charToSend[i])
-            if type(charToSend[i]) is int:
-                temp = charToSend[i]
-                temp = bytes(temp)                
-                charToByte.append(temp)
-                print("if : ", temp)
-            else:
-                temp1 = charToSend[i]
-                temp1 = temp1.encode()
-                charToByte.append(temp1)
-                print("else", temp1)
+            temp1 = charToSend[i]
+            temp1 = temp1.encode()
+            charToByte.append(temp1)
+            print("else", temp1)
 
             i = i+1     
 
@@ -84,17 +79,38 @@ class Sigfox:
         print("char To Byte : ", charToByte )
         print("taille", len(charToByte))
 
-        self.serialPort.write(b'\xff')
-        self.serialPort.write(b'\xff')
-        self.serialPort.write(b'\xff')
-        self.serialPort.write(b'\xff')
-        self.serialPort.write(b'\xff')
+        #temp2 = "ÿ".encode()
+        temp2 = str(255).encode()
+
+        self.serialPort.write(temp2)
+        self.serialPort.write(temp2)
+        self.serialPort.write(temp2)
+        self.serialPort.write(temp2)
+        self.serialPort.write(temp2)
+        self.serialPort.write(charToByte[0])
         self.serialPort.write(charToByte[1])
         self.serialPort.write(charToByte[2])
         self.serialPort.write(charToByte[3])
         self.serialPort.write(charToByte[4])
         self.serialPort.write(charToByte[5])
-        self.serialPort.write(charToByte[6])
+
+    def sendData(self, message):
+        temp = message.encode()
+        print("message : ", temp)
+        temp2 = str(44).encode()
+        temp3 = str(48).encode()
+        temp4 = str(13).encode()
+        self.serialPort.write(temp)
+        self.serialPort.write(temp2)
+        self.serialPort.write(temp3)
+        self.serialPort.write(temp4)
+
+    
+    def receiveData(self, size):
+        temp = self.serialPort.read(size)
+        print("message reçu raw : ", temp)
+        message = temp.decode()
+        print("message reçu : ", message)
 
 
        
