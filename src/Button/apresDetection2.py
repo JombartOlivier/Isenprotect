@@ -20,8 +20,9 @@ GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)    # set GPIO25 as input (bu
 pygame.mixer.init()
 pygame.mixer.music.set_volume(2.0)
 
-path = "/home/pi/Isenprotect/fichiers_audio/Alerte_collision_detectee.mp3"
-		
+path = "/home/pi/Isenprotect/src/fichiers_audio/Alerte_collision_detectee.mp3"
+path2 = "/home/pi/Isenprotect/src/fichiers_audio/Envoie_des_secours_ a_votre_position.mp3"										
+path3 = "/home/pi/Isenprotect/src/fichiers_audio/Fin_d_alerte.mp3"		
 
 #fonction play music
 def play_music() :
@@ -39,7 +40,6 @@ def my_callback(cha):
     valeur=1
     
 
-
 #detection changement d'état et appel de la fonction callback
 GPIO.add_event_detect(25, GPIO.RISING, callback=my_callback)
 
@@ -52,16 +52,17 @@ while accident_potentiel<10 :
 	play_music()
 	GPIO.output(18,GPIO.LOW)
 	print(accident_potentiel)
-	time.sleep(0.25)
+	time.sleep(0.5)
 	accident_potentiel+=1
 
 if valeur==0:
 	print("accident confirme, envoie des secours à votre position")
-	pygame.mixer.music.load("Envoie_des_secours_ a_votre_position.wav")
+	pygame.mixer.music.load(path2)
 	play_music()
 
 else :	
-	pygame.mixer.music.load("Fin_d_alerte.wav")
+	print("fin de l'alerte")
+	pygame.mixer.music.load(path3)
 	play_music()
 
 
