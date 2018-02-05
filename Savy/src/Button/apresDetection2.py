@@ -19,6 +19,7 @@ GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)    # set GPIO25 as input (bu
 # Define a threaded callback function to run in another thread when events are detected  
 def my_callback(cha):  
 	
+    global accident_potentiel
     accident_potentiel=10
     print("interruption",accident_potentiel)
 
