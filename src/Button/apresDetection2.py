@@ -4,6 +4,7 @@
 import RPi.GPIO as GPIO  
 import time 
 import pygame
+import os
   
 
 #flag de sortie de boucle
@@ -19,7 +20,8 @@ GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)    # set GPIO25 as input (bu
 pygame.mixer.init()
 pygame.mixer.music.set_volume(2.0)
 
-
+path = "/home/pi/Isenprotect/fichiers_audio/Alerte_collision_detectee.mp3"
+		
 
 #fonction play music
 def play_music() :
@@ -46,7 +48,7 @@ GPIO.add_event_detect(25, GPIO.RISING, callback=my_callback)
 while accident_potentiel<10 :
 	GPIO.output(18,GPIO.HIGH)   #led clignote 
 	print("Alerte, collision detectee, attente de confirmation")
-	pygame.mixer.music.load("Alerte_collision_detectee.wav")
+	pygame.mixer.music.load(path)
 	play_music()
 	GPIO.output(18,GPIO.LOW)
 	print(accident_potentiel)
