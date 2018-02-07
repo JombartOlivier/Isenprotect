@@ -95,13 +95,14 @@ class Sigfox:
         self.serialPort.write(b'\x3D')
 
     def sendData(self, message):
-        temp = message.encode()
-        temp5 = int.from_bytes(temp, byteorder='little')
-        print("message : ", temp5)
-        temp2 = str(44).encode()
-        temp3 = str(48).encode()
-        temp4 = str(13).encode()
-        self.serialPort.write(temp)
+        for i in message: 
+            temp = '{:02X}'.format(ord(i))
+            for t in temp:
+                charIntoByte = t.encode('utf_8')
+                print("Data send", charIntoByte)
+                self.serialPort.write(charIntoByte)
+        #self.serialPort.write(b'4')
+        #self.serialPort.write(b'8')
         self.serialPort.write(b'\x2C')
         self.serialPort.write(b'\x30')
         self.serialPort.write(b'\x0D')
