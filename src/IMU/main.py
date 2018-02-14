@@ -3,9 +3,16 @@
 #
 
 import imu
+from mpu6050 import mpu6050
+from time import sleep
 
-axeX = 0
-axeY = 0
-axeZ = 0 
+sensor = mpu6050(0x68)
 
-get_x_rotation(axeX, axeY, axeZ)
+averageAccel = []
+averageGyro = []
+
+averageAccel, averageGyro = imu.Calibration(sensor)
+print("fin calibration")
+print("acceleration : ", averageAccel)
+imu.test(sensor)
+imu.waitCrash(sensor, averageAccel, averageGyro)

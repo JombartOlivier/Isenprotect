@@ -1,72 +1,101 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
-#
+"""Released under the MIT License
+Copyright 2015, 2016 MrTijn/Tijndagamer
+"""
 
-import smbus
-import math
- 
-# Register
-power_mgmt_1 = 0x6b
-power_mgmt_2 = 0x6c
- 
-def read_byte(reg):
-    return bus.read_byte_data(address, reg)
- 
-def read_word(reg):
-    h = bus.read_byte_data(address, reg)
-    l = bus.read_byte_data(address, reg+1)
-    value = (h << 8) + l
-    return value
- 
-def read_word_2c(reg):
-    val = read_word(reg)
-    if (val >= 0x8000):
-        return -((65535 - val) + 1)
-    else:
-        return val
- 
-def dist(a,b):
-    return math.sqrt((a*a)+(b*b))
- 
-def get_y_rotation(x,y,z):
-    radians = math.atan2(x, dist(y,z))
-    return -math.degrees(radians)
- 
-def get_x_rotation(x,y,z):
-    radians = math.atan2(y, dist(x,z))
-    return math.degrees(radians)
- 
-bus = smbus.SMBus(1) # bus = smbus.SMBus(0) fuer Revision 1
-address = 0x68       # via i2cdetect
- 
-# Aktivieren, um das Modul ansprechen zu koennen
-bus.write_byte_data(address, power_mgmt_1, 0)
- 
-print("Gyroskop")
-print("--------")
- 
-gyroskop_xout = read_word_2c(0x43)
-gyroskop_yout = read_word_2c(0x45)
-gyroskop_zout = read_word_2c(0x47)
- 
-print("gyroskop_xout: ", ("%5d" % gyroskop_xout), " skaliert: ", (gyroskop_xout / 131))
-print("gyroskop_yout: ", ("%5d" % gyroskop_yout), " skaliert: ", (gyroskop_yout / 131))
-print("gyroskop_zout: ", ("%5d" % gyroskop_zout), " skaliert: ", (gyroskop_zout / 131))
- 
-print("Beschleunigungssensor")
-print("---------------------")
- 
-beschleunigung_xout = read_word_2c(0x3b)
-beschleunigung_yout = read_word_2c(0x3d)
-beschleunigung_zout = read_word_2c(0x3f)
- 
-beschleunigung_xout_skaliert = beschleunigung_xout / 16384.0
-beschleunigung_yout_skaliert = beschleunigung_yout / 16384.0
-beschleunigung_zout_skaliert = beschleunigung_zout / 16384.0
- 
-print("beschleunigung_xout: ", ("%6d" % beschleunigung_xout), " skaliert: ", beschleunigung_xout_skaliert)
-print("beschleunigung_yout: ", ("%6d" % beschleunigung_yout), " skaliert: ", beschleunigung_yout_skaliert)
-print("beschleunigung_zout: ", ("%6d" % beschleunigung_zout), " skaliert: ", beschleunigung_zout_skaliert)
- 
-print("X Rotation: " , get_x_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
-print("Y Rotation: " , get_y_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
+from mpu6050 import mpu6050
+from time import sleep
+
+#sensor = mpu6050(0x68)
+
+#while True:
+#    accel_data = sensor.get_accel_data()
+#    gyro_data = sensor.get_gyro_data()
+#   temp = sensor.get_temp()
+
+#    print("Accelerometer data")
+#    print("x: " + str(accel_data['x']))
+#    print("y: " + str(accel_data['y']))
+#    print("z: " + str(accel_data['z']))
+
+#   print("Gyroscope data")
+#    print("x: " + str(gyro_data['x']))
+#    print("y: " + str(gyro_data['y']))
+#    print("z: " + str(gyro_data['z']))
+
+#    print("Temp: " + str(temp) + " C")
+#    sleep(0.5)
+
+def Calibration(sensor):
+    averageAccel = [0.0, 0.0, 0.0]
+    averageGyro = [0.0, 0.0, 0.0]
+
+    i = 0
+
+    while i < 10:
+
+        accelData = sensor.get_accel_data()
+        gyroData = sensor.get_gyro_data()
+
+        averageAccel[0] = averageAccel[0] + accelData['x']
+        averageAccel[1] = averageAccel[1] + accelData['y']
+        averageAccel[2] = averageAccel[2] + accelData['z']
+
+        averageGyro[0] = averageGyro[0] + gyroData['x']
+        averageGyro[1] = averageGyro[1] + gyroData['y']
+        averageGyro[2] = averageGyro[2] + gyroData['z']
+
+        i = i+1
+        sleep(0.2)
+
+    averageAccel[0] = averageAccel[0]/i
+    averageAccel[1] = averageAccel[1]/i
+    averageAccel[2] = averageAccel[2]/i
+
+    averageGyro[0] = averageGyro[0]/i
+    averageGyro[1] = averageGyro[1]/i
+    averageGyro[2] = averageGyro[2]/i
+    
+    return averageGyro, averageAccel
+
+def waitCrash(sensor, averageAccel, averageGyro):
+
+    isCrash = 0
+    accelerationGravitationnel = 9.81
+    coefMultiplicateur = 1.5
+
+    while isCrash == 0:
+            
+        accelData = sensor.get_accel_data()
+        gyroData = sensor.get_gyro_data()
+
+        if abs(accelData['x']) > coefMultiplicateur*accelerationGravitationnel:
+            isCrash = 1
+            print("axe X : ", isCrash)
+        elif abs(accelData['y']) > coefMultiplicateur*accelerationGravitationnel:
+            isCrash = 1
+            print("axe Y : ", isCrash)
+
+        elif abs(accelData['z']) > coefMultiplicateur*accelerationGravitationnel:
+            isCrash = 1
+            print("axe Z : ", isCrash)
+
+        else:
+            isCrash = 0
+            print("pas de crash")
+                
+                  
+def test(sensor):
+
+    accelData = sensor.get_accel_data()
+    gyroData = sensor.get_gyro_data()
+    while True:
+        print("axe X", accelData['x'])
+        print("axe Y", accelData['y'])
+        print("axe Z", accelData['z'])
+        sleep(10)
+
+        
+
+         
+

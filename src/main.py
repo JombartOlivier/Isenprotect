@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 
-import SigfoxCom
+import Sigfox/SigfoxCom
 import serial
 
 a = SigfoxCom.Sigfox
