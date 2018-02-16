@@ -26,14 +26,14 @@ from time import sleep
 #    print("Temp: " + str(temp) + " C")
 #    sleep(0.5)
 
-def Calibration(sensor):
+def imuCalibration(sensor):
     averageAccel = [0.0, 0.0, 0.0]
     averageGyro = [0.0, 0.0, 0.0]
 
     i = 0
 
     while i < 10:
-
+    
         accelData = sensor.get_accel_data()
         gyroData = sensor.get_gyro_data()
 
@@ -47,53 +47,54 @@ def Calibration(sensor):
 
         i = i+1
         sleep(0.2)
-
+    
     averageAccel[0] = averageAccel[0]/i
     averageAccel[1] = averageAccel[1]/i
     averageAccel[2] = averageAccel[2]/i
 
-    averageGyro[0] = averageGyro[0]/i
-    averageGyro[1] = averageGyro[1]/i
-    averageGyro[2] = averageGyro[2]/i
+    averageGyro[0] = averageGyro[0]/(i-1)
+    averageGyro[1] = averageGyro[1]/(i-1)
+    averageGyro[2] = averageGyro[2]/(i-1)
     
     return averageGyro, averageAccel
 
-def waitCrash(sensor, averageAccel, averageGyro):
+def isCrash(sensor, averageAccel, averageGyro):
 
     isCrash = 0
     accelerationGravitationnel = 9.81
-    coefMultiplicateur = 1.5
-
-    while isCrash == 0:
+    coefMultiplicateur = 1.25
+    firstValue = sensor.get_accel_data()
+    print("premier valeur : ", firstValue)
             
-        accelData = sensor.get_accel_data()
-        gyroData = sensor.get_gyro_data()
+    accelData = sensor.get_accel_data()
+    gyroData = sensor.get_gyro_data()
 
-        if abs(accelData['x']) > coefMultiplicateur*accelerationGravitationnel:
-            isCrash = 1
-            print("axe X : ", isCrash)
-        elif abs(accelData['y']) > coefMultiplicateur*accelerationGravitationnel:
-            isCrash = 1
-            print("axe Y : ", isCrash)
+    if  abs(accelData['x']) - abs(averageAccel[0]) > coefMultiplicateur*accelerationGravitationnel:
+        isCrash = 1
+        print("axe X : ", abs(accelData['x']))
+    elif abs(accelData['y']) - abs(averageAccel[1]) > coefMultiplicateur*accelerationGravitationnel:
+        isCrash = 1
+        print("axe Y : ", abs(accelData['y']))
 
-        elif abs(accelData['z']) > coefMultiplicateur*accelerationGravitationnel:
-            isCrash = 1
-            print("axe Z : ", isCrash)
+    elif abs(accelData['z']) - abs(averageAccel[2]) > coefMultiplicateur*accelerationGravitationnel:
+        isCrash = 1
+        print("axe Z : ", abs(accelData['z']))
 
-        else:
-            isCrash = 0
-            print("pas de crash")
+    else:
+        isCrash = 0
+        print("pas de crash")
+    return isCrash
                 
                   
 def test(sensor):
 
-    accelData = sensor.get_accel_data()
     gyroData = sensor.get_gyro_data()
     while True:
+        accelData = sensor.get_accel_data()
         print("axe X", accelData['x'])
         print("axe Y", accelData['y'])
         print("axe Z", accelData['z'])
-        sleep(10)
+        sleep(0.25)
 
         
 

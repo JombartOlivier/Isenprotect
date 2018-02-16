@@ -25,12 +25,21 @@ path2 = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Envoie_des_secours_a_
 path3 = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Fin_d_alerte.mp3"		
 
 #fonction play music
-def play_music() :
+def play_music(state) :
+	
+	if state == 1:
+		path = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Alerte_collision_detectee.mp3"
+	elif state == 2:
+		path = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Envoie_des_secours_a_votre_position.mp3"
+	elif state == 0:
+		path3 = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Fin_d_alerte.mp3"
 
+	pygame.mixer.music.load(path)
 	pygame.mixer.music.play()
+
 	while pygame.mixer.music.get_busy() == True:
    		continue
-
+	
 # Define a threaded callback function to run in another thread when events are detected  
 def my_callback(cha):  
 	
