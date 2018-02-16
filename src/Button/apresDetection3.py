@@ -20,9 +20,9 @@ GPIO.setup(25, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)    # set GPIO25 as input (bu
 pygame.mixer.init()
 pygame.mixer.music.set_volume(2.0)
 
-path = "/home/pi/Isenprotect/src/fichiers_audio/Alerte_collision_detectee.mp3"
-path2 = "/home/pi/Isenprotect/src/fichiers_audio/Envoie_des_secours_ a_votre_position.mp3"										
-path3 = "/home/pi/Isenprotect/src/fichiers_audio/Fin_d_alerte.mp3"		
+path = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Alerte_collision_detectee.mp3"
+path2 = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Envoie_des_secours_a_votre_position.mp3"										
+path3 = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Fin_d_alerte.mp3"		
 
 #fonction play music
 def play_music() :
@@ -43,27 +43,28 @@ def my_callback(cha):
 #detection changement d'état et appel de la fonction callback
 GPIO.add_event_detect(25, GPIO.RISING, callback=my_callback)
 
+def detectionButton() :
+	global accident_potentiel
+	while accident_potentiel<10 :
+		GPIO.output(18,GPIO.HIGH)   #led clignote 
+		print("Alerte, collision detectee, attente de confirmation")
+		pygame.mixer.music.load(path)
+		play_music()
+		print(accident_potentiel)
+		time.sleep(0.5)
+		accident_potentiel+=1
 
-#main
-while accident_potentiel<10 :
-	GPIO.output(18,GPIO.HIGH)   #led clignote 
-	print("Alerte, collision detectee, attente de confirmation")
-	pygame.mixer.music.load(path)
-	play_music()
-	GPIO.output(18,GPIO.LOW)
-	print(accident_potentiel)
-	time.sleep(0.5)
-	accident_potentiel+=1
+	if valeur==0:
+		print("accident confirme, envoie des secours à votre position")
+		pygame.mixer.music.load(path2)
+		play_music()
+		GPIO.output(18,GPIO.LOW)
 
-if valeur==0:
-	print("accident confirme, envoie des secours à votre position")
-	pygame.mixer.music.load(path2)
-	play_music()
-
-else :	
-	print("fin de l'alerte")
-	pygame.mixer.music.load(path3)
-	play_music()
+	else :	
+		print("fin de l'alerte")
+		pygame.mixer.music.load(path3)
+		play_music()
+		GPIO.output(18,GPIO.LOW)
 
 
 
