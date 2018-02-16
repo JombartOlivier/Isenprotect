@@ -4,12 +4,12 @@
 import RPi.GPIO as GPIO  
 import time 
 import pygame
-import os
+
   
 
 #flag de sortie de boucle
 accident_potentiel=0
-valeur=0
+state=0
 #setting GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -35,26 +35,29 @@ def play_music() :
 def my_callback(cha):  
 	
     global accident_potentiel
-    global valeur
+    global state
+    
     accident_potentiel=10
-    valeur=1
+    state=1
     
 
 #detection changement d'état et appel de la fonction callback
 GPIO.add_event_detect(25, GPIO.RISING, callback=my_callback)
 
 def detectionButton() :
+
 	global accident_potentiel
+	global state
+
 	while accident_potentiel<10 :
 		GPIO.output(18,GPIO.HIGH)   #led clignote 
 		print("Alerte, collision detectee, attente de confirmation")
 		pygame.mixer.music.load(path)
 		play_music()
 		print(accident_potentiel)
-		time.sleep(0.5)
 		accident_potentiel+=1
 
-	if valeur==0:
+	if state==0:
 		print("accident confirme, envoie des secours à votre position")
 		pygame.mixer.music.load(path2)
 		play_music()
