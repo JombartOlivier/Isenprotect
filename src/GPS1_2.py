@@ -14,12 +14,13 @@ class GPS:
 		self._longitude=""
 
 	def _set_lattitude(self, lattitude):
-		self.lattitude=lattitude
+		lattitude=self.lattitude
 		print(self.lattitude)
 
 	def _set_longitude(self, longitude):
-		self.longitude=longitude
+		self.longitude=Longitude
 		print(self.longitude)
+		return self.longitude
 
 	def _get_lattitude(self):
 		print(self.lattitude)
@@ -76,8 +77,6 @@ class GPS:
 
 		self.longitude=""
 		self.lattitude=""
-  
-
 
 
 	
