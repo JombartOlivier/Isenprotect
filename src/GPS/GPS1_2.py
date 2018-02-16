@@ -69,7 +69,7 @@ class GPS:
 		 		self.longitude=longitudePrint2
 		 		#print(self.lattitude)
 		 		#print(self.longitude)
-		 		
+		 		ser.close()
 		 		break
 		
 		
