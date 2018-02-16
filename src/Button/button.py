@@ -21,9 +21,9 @@ GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)    # set GPIO25 as input
 pygame.mixer.init()
 pygame.mixer.music.set_volume(2.0)
 
-path = "/home/pi/Isenprotect/src/fichiers_audio/Alerte_collision_detectee.mp3"
-path2 = "/home/pi/Isenprotect/src/fichiers_audio/Envoie_des_secours_a_votre_position.mp3"										
-path3 = "/home/pi/Isenprotect/src/fichiers_audio/Fin_d_alerte.mp3"		
+path = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Alerte_collision_detectee.mp3"
+path2 = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Envoie_des_secours_a_votre_position.mp3"										
+path3 = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Fin_d_alerte.mp3"		
 
 
 class Button :
@@ -46,7 +46,8 @@ class Button :
 	# def _get_timing(self):
 	# 	print(self.timing)
 	#	return self.timing
-	def getTiming(self):
+	def _get_timing(self):
+		print(self.timing)
 		return self.timing
 
 
@@ -62,9 +63,10 @@ class Button :
 		timing=10
 		state=1
 	
-	GPIO.add_event_detect(button, GPIO.RISING, callback=my_callback(0,0,0))
+	
 
 	def detectionButton(self,timing,state):
+		GPIO.add_event_detect(button, GPIO.RISING, callback=my_callback(self,0,0))
 		self.timing=timing
 		self.state=state
 		while timing < 10 :
@@ -89,6 +91,4 @@ class Button :
 			pygame.mixer.music.load(path3)
 			Button.playAudio()
 
-
-	# timing = property(_get_timing, _set_timing)
-	# state = property(_get_state, _set_state)
+		
