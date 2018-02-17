@@ -4,9 +4,9 @@
 
 import SigfoxCom
 import serial
-import imu
-#from mpu6050 import mpu6050
-import apresDetection4
+from imu import *
+from mpu6050 import mpu6050
+from apresDetection4 import *
 import RPi.GPIO as GPIO  
 import time 
 import GPS1_2
@@ -53,11 +53,11 @@ while finProgramme == True:
     print("etat : ", state)
     if state == 0:
         state = isCrash(imu, averageAcceleration, averageGyroscope)
-        GPIO.output(GpioNumber,GPIO.LOW)
+        GPIO.output(ledGpioNumber,GPIO.LOW)
         temp = time.time()
 
     elif state == 1:
-        GPIO.output(GpioNumber,GPIO.HIGH)
+        GPIO.output(ledGpioNumber,GPIO.HIGH)
         play_music(state)
         print("temps d'attente", time.time() - temp)
         if (time.time() - temp) > tempAttentes:
@@ -66,7 +66,7 @@ while finProgramme == True:
             state = 3
         
     elif state == 2:
-        GPIO.output(GpioNumber,GPIO.LOW)
+        GPIO.output(ledGpioNumber,GPIO.LOW)
         play_music(state)
         
         gps.setDataGps(gps)
@@ -83,7 +83,7 @@ while finProgramme == True:
         finProgramme = False
 
     elif state == 3:
-        GPIO.output(GpioNumber,GPIO.LOW)
+        GPIO.output(ledGpioNumber,GPIO.LOW)
         play_music(state)
         state = 0
 sigfox.closeUartPort(sigfox)
