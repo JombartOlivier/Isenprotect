@@ -20,6 +20,7 @@ gps = GPS1_2.GPS
 
 ledGpioNumber = 18
 boutonNumber = 25
+
 #setting GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
@@ -28,7 +29,7 @@ GPIO.setup(boutonNumber, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 
 
-tempAttentes = 20
+tempAttente = 20
 # Imu declaration
 imuAddr = 0x68
 averageAcceleration = []
@@ -43,50 +44,55 @@ averageGyroscope, averageAcceleration = imuCalibration(imu)
 # Define a threaded callback function to run in another thread when events are detected  
 def my_callback(cha):  
     state=3
+    print("coucou")
     
 
 #detection changement d'état et appel de la fonction callback
-GPIO.add_event_detect(25, GPIO.RISING, callback=my_callback)
+GPIO.add_event_detect(boutonNumber, GPIO.RISING, callback=my_callback)
 finProgramme = True
-
+print("etat : ",state)
 while finProgramme == True:
-    print("etat : ", state)
-    if state == 0:
-        state = isCrash(imu, averageAcceleration, averageGyroscope)
-        GPIO.output(ledGpioNumber,GPIO.LOW)
-        temp = time.time()
-
-    elif state == 1:
-        GPIO.output(ledGpioNumber,GPIO.HIGH)
-        play_music(state)
-        print("temps d'attente", time.time() - temp)
-        if (time.time() - temp) > tempAttentes:
-            state = 2
-        else:
-            state = 3
+	#print("etat : ", state)	
+	#etat de detection d'accident via l'IMU
+	if state == 0:
+		state = isCrash(imu, averageAcceleration, averageGyroscope)
+		GPIO.output(ledGpioNumber,GPIO.LOW)
+		temp = time.time()
+	elif state == 1:
+		print("etat : ",state)
+		GPIO.output(ledGpioNumber,GPIO.HIGH)
+		play_music(state)
+		x= int(time.time() - temp)
+		print("temps d'attente :", x)
+		if (time.time() - temp) > tempAttente:
+			state = 2
         
-    elif state == 2:
-        GPIO.output(ledGpioNumber,GPIO.LOW)
-        play_music(state)
-        
-        gps.setDataGps(gps)
-        lattitude = gps.lattitude
-        longitude = gps.longitude
-        # close port
+    #etat si l'utilisateur n'a pas appuyé sur le bouton   
+	elif state == 2:
+		print("etat : ",state)
+		GPIO.output(ledGpioNumber,GPIO.LOW)
+		play_music(state)
+		gps.setDataGps(gps)
+		lattitude = gps.lattitude
+		longitude = gps.longitude
+		# close port
+		print("lattitude : ", lattitude)
+		print("longitude : ", longitude)
+		sigfox.wakeUpSigfox(sigfox)
+		#sigfox.sendData(sigfox, lattitude)
+		sleep(0.5)
+		#sigfox.sendData(sigfox, longitude)
+		sigfox.closeUartPort(sigfox)
 
-        sigfox.wakeUpSigfox(sigfox)
-        sigfox.sendData(sigfox, lattitude)
-        sleep(0.5)
-        sigfox.sendData(sigfox, longitude)
+		state = 3
+		finProgramme = False
+	#etat si l'utilisateur a appuyé sur le bouton
+	elif state == 3:
+		print("etat : ",state)
+		GPIO.output(ledGpioNumber,GPIO.LOW)
+		play_music(state)
+		state = 0 #on revient à l'état 1
 
-        state = 3
-        finProgramme = False
-
-    elif state == 3:
-        GPIO.output(ledGpioNumber,GPIO.LOW)
-        play_music(state)
-        state = 0
-sigfox.closeUartPort(sigfox)
         
 
 

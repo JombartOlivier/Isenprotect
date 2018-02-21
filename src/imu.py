@@ -64,7 +64,7 @@ def isCrash(sensor, averageAccel, averageGyro):
     accelerationGravitationnel = 9.81
     coefMultiplicateur = 1.25
     firstValue = sensor.get_accel_data()
-    print("premier valeur : ", firstValue)
+    #print("premier valeur : ", firstValue)
             
     accelData = sensor.get_accel_data()
     gyroData = sensor.get_gyro_data()
@@ -82,7 +82,7 @@ def isCrash(sensor, averageAccel, averageGyro):
 
     else:
         isCrash = 0
-        print("pas de crash")
+        #print("pas de crash")
     return isCrash
                 
                   
