@@ -12,10 +12,6 @@ import time
 import GPS1_2
  
 sigfox = SigfoxCom.Sigfox
-
-sigfox.openUartPort(sigfox, "/dev/ttyAMA0", 115200, 2)
-
-
 gps = GPS1_2.GPS
 
 ledGpioNumber = 18
@@ -36,15 +32,16 @@ averageAcceleration = []
 averageGyroscope = []
 imu = mpu6050(imuAddr)
 
-global state
+
 state = 0
 
 averageGyroscope, averageAcceleration = imuCalibration(imu) 
 
 # Define a threaded callback function to run in another thread when events are detected  
-def my_callback(cha):  
-    state=3
-    print("coucou")
+def my_callback(cha): 
+	global state
+	state=3
+	
     
 
 #detection changement d'état et appel de la fonction callback
@@ -75,16 +72,16 @@ while finProgramme == True:
 		gps.setDataGps(gps)
 		lattitude = gps.lattitude
 		longitude = gps.longitude
+		coordonnees = lattitude + longitude
 		# close port
 		print("lattitude : ", lattitude)
 		print("longitude : ", longitude)
-		sigfox.wakeUpSigfox(sigfox)
-		#sigfox.sendData(sigfox, lattitude)
 		sleep(0.5)
-		#sigfox.sendData(sigfox, longitude)
+		sigfox.openUartPort(sigfox, "/dev/ttyAMA0", 115200, 2)
+		sleep(0.5)
+		sigfox.wakeUpSigfox(sigfox)
+		sigfox.sendData(sigfox, coordonnees)
 		sigfox.closeUartPort(sigfox)
-
-		state = 3
 		finProgramme = False
 	#etat si l'utilisateur a appuyé sur le bouton
 	elif state == 3:
@@ -92,6 +89,7 @@ while finProgramme == True:
 		GPIO.output(ledGpioNumber,GPIO.LOW)
 		play_music(state)
 		state = 0 #on revient à l'état 1
+		print("etat : ",state)
 
         
 

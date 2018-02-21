@@ -56,8 +56,8 @@ class GPS:
 
 	def setDataGPS() :
 
-		self.lattitude = lattitude
-		self.longitude = longitude
+		self.lattitude = lattitudePrint
+		self.longitude = longitudePrint
 		self.serialPort = ser
 		ser = serial.Serial(
 			port='/dev/ttyAMA0',
@@ -78,19 +78,20 @@ class GPS:
 		 		
 		 			if i==24 :
 		 				i=25
-		 			lattitude.append(x[i])
+		 			lattitudeAscii.append(x[i])
 			
 		 		#EST
 		 		for i in range(33,39) :
 		 			if i==37 :
 		 				i=38
-		 			longitude.append(x[i])
+		 			longitudeAscii.append(x[i])
+
 		 	 	
-		 		lattitudePrint=''.join(chr(j) for j in lattitude)
-		 		longitudePrint=''.join(chr(k)	for k in longitude)
+		 		ser.close()
+		 		lattitudePrint=''.join(chr(j) for j in lattitudeAscii)
+		 		longitudePrint=''.join(chr(k)	for k in longitudeAscii)
 		 		
-		 		print(lattitude)
-		 		print(longitude)
+		 		
 		 		
 		 		break
 		

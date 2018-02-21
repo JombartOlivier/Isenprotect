@@ -49,10 +49,10 @@ class Sigfox:
         self.timeOut = timeout
 
         
-        print("Parametre de la liaison Uart :")
-        print("Port       : ", self.port)
-        print("Baude rate : ", self.baudRate)
-        print("timeout    : " , self.timeOut)
+        #print("Parametre de la liaison Uart :")
+        #print("Port       : ", self.port)
+        #print("Baude rate : ", self.baudRate)
+        #print("timeout    : " , self.timeOut)
 
         self.serialPort = serial.Serial(self.port, self.baudRate, timeout = self.timeOut)
 
@@ -67,16 +67,16 @@ class Sigfox:
 
         while i < len(charToSend):
 
-            print("start : ", i, charToSend[i])
+            #print("start : ", i, charToSend[i])
             temp1 = charToSend[i]
             temp1 = temp1.encode()
             charToByte.append(temp1)
-            print("else", temp1)
+            #print("else", temp1)
 
             i = i+1     
 
-        print("char To Send : ", charToSend)
-        print("char To Byte : ", charToByte )
+        #print("char To Send : ", charToSend)
+        #print("char To Byte : ", charToByte )
         print("taille", len(charToByte))
 
         #temp2 = "ÿ".encode()
@@ -93,13 +93,14 @@ class Sigfox:
         self.serialPort.write(b'\x53')
         self.serialPort.write(b'\x46')
         self.serialPort.write(b'\x3D')
+        print("Données envoyées")
 
     def sendData(self, message):
         for i in message: 
             temp = '{:02X}'.format(ord(i))
             for t in temp:
                 charIntoByte = t.encode('utf_8')
-                print("Data send", charIntoByte)
+                #print("Data send", charIntoByte)
                 self.serialPort.write(charIntoByte)
         #self.serialPort.write(b'4')
         #self.serialPort.write(b'8')
