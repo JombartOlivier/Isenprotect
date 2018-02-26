@@ -14,7 +14,7 @@ import GPS1_2
 sigfox = SigfoxCom.Sigfox
 gps = GPS1_2.GPS
 
-ledGpioNumber = 18
+ledGpioNumber = 26
 boutonNumber = 25
 
 #setting GPIO
@@ -22,6 +22,10 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 GPIO.setup(ledGpioNumber,GPIO.OUT) 							   #LED du bouton
 GPIO.setup(boutonNumber, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+#setting Multiplexeur
+GPIOenableMultiplexeur = 17
+GPIO.setup(GPIOenableMultiplexeur, GPIO.OUT)
 
 
 
@@ -67,7 +71,8 @@ while finProgramme == True:
     #etat si l'utilisateur n'a pas appuyé sur le bouton   
 	elif state == 2:
 		print("etat : ",state)
-		GPIO.output(ledGpioNumber,GPIO.LOW)
+		GPIO;output(GPIOenableMultiplexeur, GPIO.HIGH)
+		GPIO.output(ledGpioNumber, GPIO.LOW)
 		play_music(state)
 		gps.setDataGps(gps)
 		lattitude = gps.lattitude
@@ -77,6 +82,7 @@ while finProgramme == True:
 		print("lattitude : ", lattitude)
 		print("longitude : ", longitude)
 		sleep(0.5)
+		GPIO.output(ledGpioNumber, GPIO.LOW)
 		sigfox.openUartPort(sigfox, "/dev/ttyAMA0", 115200, 2)
 		sleep(0.5)
 		sigfox.wakeUpSigfox(sigfox)
