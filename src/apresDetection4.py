@@ -24,7 +24,7 @@ def play_music(state) :
 	elif state == 2:
 		path = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Envoie_des_secours_a_votre_position.mp3"
 	elif state == 3:
-		path3 = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Fin_d_alerte.mp3"
+		path = "/home/pi/Documents/Isenprotect/src/fichiers_audio/Fin_d_alerte.mp3"
 
 	pygame.mixer.music.load(path)
 	pygame.mixer.music.play()
