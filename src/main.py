@@ -88,6 +88,7 @@ while finProgramme == True:
 		sigfox.wakeUpSigfox(sigfox)
 		sigfox.sendData(sigfox, coordonnees)
 		sigfox.closeUartPort(sigfox)
+		GPIO.output(ledGpioNumber,GPIO.LOW)
 		finProgramme = False
 	#etat si l'utilisateur a appuyé sur le bouton
 	elif state == 3:
