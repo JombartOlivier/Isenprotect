@@ -71,7 +71,7 @@ while finProgramme == True:
     #etat si l'utilisateur n'a pas appuyé sur le bouton   
 	elif state == 2:
 		print("etat : ",state)
-		GPIO;output(GPIOenableMultiplexeur, GPIO.HIGH)
+		GPIO.output(GPIOenableMultiplexeur, GPIO.LOW)
 		GPIO.output(ledGpioNumber, GPIO.LOW)
 		play_music(state)
 		gps.setDataGps(gps)
@@ -82,7 +82,7 @@ while finProgramme == True:
 		print("lattitude : ", lattitude)
 		print("longitude : ", longitude)
 		sleep(0.5)
-		GPIO.output(ledGpioNumber, GPIO.LOW)
+		GPIO.output(ledGpioNumber, GPIO.HIGH)
 		sigfox.openUartPort(sigfox, "/dev/ttyAMA0", 115200, 2)
 		sleep(0.5)
 		sigfox.wakeUpSigfox(sigfox)
