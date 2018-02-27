@@ -1,0 +1,72 @@
+Removed Member From Class: ClassName=vehicle electronics Member=F1
+Change Component Designator: OldDesignator=Buck* NewDesignator=Buck
+Added Component: Designator=D*(SOIC20)
+Added Component: Designator=DS1(LED0805G)
+Added Component: Designator=R1(R0805)
+Added Component: Designator=R3(R0805)
+Added Component: Designator=R4(R0805)
+Added Pin To Net: NetName=GND Pin=071349-7
+Added Pin To Net: NetName=GND Pin=Buck-2
+Added Pin To Net: NetName=GND Pin=Buck-3
+Added Pin To Net: NetName=GPIO24 Pin=D*-1
+Added Pin To Net: NetName=RXD Pin=D*-3
+Added Pin To Net: NetName=TXD Pin=D*-4
+Added Pin To Net: NetName=TXD Pin=D*-15
+Added Pin To Net: NetName=RXD Pin=D*-18
+Added Pin To Net: NetName=GPIO23 Pin=D*-19
+Added Pin To Net: NetName=GND Pin=DS1-2
+Added Pin To Net: NetName=GND Pin=Power-2
+Added Pin To Net: NetName=GND Pin=R4-1
+Added Pin To Net: NetName=GND Pin=sig1-2
+Added Pin To Net: NetName=GND Pin=Signal button-2
+Added Pin To Net: NetName=3.3V Pin=R_PI-1
+Added Pin To Net: NetName=3.3V Pin=R_PI-17
+Added Pin To Net: NetName=3.3V Pin=sig1-1
+Added Pin To Net: NetName=3.3V Pin=sig1-1
+Added Net: Name=3.3V
+Added Pin To Net: NetName=5V Pin=071349-8
+Added Pin To Net: NetName=5V Pin=Buck-4
+Added Pin To Net: NetName=5V Pin=D*-20
+Added Pin To Net: NetName=5V Pin=R1-1
+Added Pin To Net: NetName=5V Pin=R_PI-2
+Added Pin To Net: NetName=5V Pin=R_PI-4
+Added Net: Name=5V
+Added Pin To Net: NetName=12V_IN Pin=Power-1
+Added Pin To Net: NetName=12V_IN Pin=Power switch-1
+Added Net: Name=12V_IN
+Added Pin To Net: NetName=12V Pin=Buck-1
+Added Pin To Net: NetName=12V Pin=Power switch-2
+Added Pin To Net: NetName=12V Pin=Signal button-1
+Added Net: Name=12V
+Added Pin To Net: NetName=Net_8 Pin=R_PI-7
+Added Net: Name=Net_8
+Added Pin To Net: NetName=NetDS1_1 Pin=DS1-1
+Added Pin To Net: NetName=NetDS1_1 Pin=R1-2
+Added Net: Name=NetDS1_1
+Added Pin To Net: NetName=NetR3_2 Pin=R3-2
+Added Pin To Net: NetName=NetR3_2 Pin=Signal button-3
+Added Net: Name=NetR3_2
+Added Pin To Net: NetName=RX1 Pin=071349-6
+Added Pin To Net: NetName=RX1 Pin=071349-6
+Added Pin To Net: NetName=RX1 Pin=D*-16
+Added Net: Name=RX1
+Added Pin To Net: NetName=RX2 Pin=D*-5
+Added Pin To Net: NetName=RX2 Pin=sig1-4
+Added Pin To Net: NetName=RX2 Pin=sig1-4
+Added Net: Name=RX2
+Added Pin To Net: NetName=SIGNAL Pin=R3-1
+Added Pin To Net: NetName=SIGNAL Pin=R4-2
+Added Pin To Net: NetName=SIGNAL Pin=R_PI-12
+Added Net: Name=SIGNAL
+Added Pin To Net: NetName=TX1 Pin=071349-5
+Added Pin To Net: NetName=TX1 Pin=071349-5
+Added Pin To Net: NetName=TX1 Pin=D*-2
+Added Net: Name=TX1
+Added Pin To Net: NetName=TX2 Pin=D*-17
+Added Pin To Net: NetName=TX2 Pin=sig1-3
+Added Net: Name=TX2
+Added Member To Class: ClassName=vehicle electronics Member=Component D* 74LS241N*
+Added Member To Class: ClassName=vehicle electronics Member=Component DS1 LED_SOP
+Added Member To Class: ClassName=vehicle electronics Member=Component R1 1K
+Added Member To Class: ClassName=vehicle electronics Member=Component R3 10K
+Added Member To Class: ClassName=vehicle electronics Member=Component R4 2.9K

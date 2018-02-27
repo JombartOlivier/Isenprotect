@@ -1,0 +1,19 @@
+Added Component: Designator=*(SOIC-16)
+Added Component: Designator=C1(C0805)
+Added Pin To Net: NetName=GPIO17 Pin=*-1
+Added Pin To Net: NetName=TX1 Pin=*-2
+Added Pin To Net: NetName=RXD Pin=*-4
+Added Pin To Net: NetName=TXD Pin=*-5
+Added Pin To Net: NetName=RX1 Pin=*-7
+Added Pin To Net: NetName=GND Pin=*-8
+Added Pin To Net: NetName=RX2 Pin=*-9
+Added Pin To Net: NetName=TXD Pin=*-10
+Added Pin To Net: NetName=RXD Pin=*-12
+Added Pin To Net: NetName=TX2 Pin=*-13
+Added Pin To Net: NetName=GND Pin=*-15
+Added Pin To Net: NetName=3.3V Pin=*-16
+Added Pin To Net: NetName=GND Pin=C1-1
+Added Pin To Net: NetName=3.3V Pin=C1-2
+Added Member To Class: ClassName=vehicle electronics Member=Component * SN74LVC157
+Added Member To Class: ClassName=vehicle electronics Member=Component C1 CAP_sop
+Added Member To Class: ClassName=vehicle electronics Member=Component GPS Ultimate GPS

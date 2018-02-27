@@ -1,0 +1,79 @@
+Change Component Library : Designator=R_PI Old Library=????V5.3.SchLib New Library=ÉúÒÇ¿ÆÐ­V5.3.SchLib
+Added Component: Designator=071349(GPS)
+Added Component: Designator=F1(F1210)
+Added Component: Designator=sig1(Sigfox)
+Added Pin To Net: NetName=3.3V_1 Pin=R_PI-1
+Added Net: Name=3.3V_1
+Added Pin To Net: NetName=3.3V_2 Pin=R_PI-17
+Added Net: Name=3.3V_2
+Added Pin To Net: NetName=5V_IN Pin=F1-1
+Added Pin To Net: NetName=5V_IN Pin=R_PI-2
+Added Pin To Net: NetName=5V_IN Pin=R_PI-4
+Added Net: Name=5V_IN
+Added Pin To Net: NetName=5V_P Pin=F1-2
+Added Net: Name=5V_P
+Added Pin To Net: NetName=BUTTON Pin=R_PI-7
+Added Net: Name=BUTTON
+Added Pin To Net: NetName=GND Pin=R_PI-6
+Added Pin To Net: NetName=GND Pin=R_PI-14
+Added Pin To Net: NetName=GND Pin=R_PI-20
+Added Pin To Net: NetName=GND Pin=R_PI-25
+Added Pin To Net: NetName=GND Pin=R_PI-30
+Added Pin To Net: NetName=GND Pin=R_PI-34
+Added Pin To Net: NetName=GND Pin=R_PI-39
+Added Net: Name=GND
+Added Pin To Net: NetName=GPIO6 Pin=R_PI-31
+Added Net: Name=GPIO6
+Added Pin To Net: NetName=GPIO16 Pin=R_PI-36
+Added Net: Name=GPIO16
+Added Pin To Net: NetName=GPIO17 Pin=R_PI-11
+Added Net: Name=GPIO17
+Added Pin To Net: NetName=GPIO18 Pin=R_PI-12
+Added Net: Name=GPIO18
+Added Pin To Net: NetName=GPIO19 Pin=R_PI-35
+Added Net: Name=GPIO19
+Added Pin To Net: NetName=GPIO20 Pin=R_PI-38
+Added Net: Name=GPIO20
+Added Pin To Net: NetName=GPIO21 Pin=R_PI-40
+Added Net: Name=GPIO21
+Added Pin To Net: NetName=GPIO22 Pin=R_PI-15
+Added Net: Name=GPIO22
+Added Pin To Net: NetName=GPIO23 Pin=R_PI-16
+Added Net: Name=GPIO23
+Added Pin To Net: NetName=GPIO24 Pin=R_PI-18
+Added Net: Name=GPIO24
+Added Pin To Net: NetName=GPIO26 Pin=R_PI-37
+Added Net: Name=GPIO26
+Added Pin To Net: NetName=GPIO27 Pin=R_PI-13
+Added Net: Name=GPIO27
+Added Pin To Net: NetName=ID_SC Pin=R_PI-28
+Added Net: Name=ID_SC
+Added Pin To Net: NetName=ID_SD Pin=R_PI-27
+Added Net: Name=ID_SD
+Added Pin To Net: NetName=INT_CAN Pin=R_PI-22
+Added Net: Name=INT_CAN
+Added Pin To Net: NetName=MISO_CAN Pin=R_PI-21
+Added Net: Name=MISO_CAN
+Added Pin To Net: NetName=MOSI_CAN Pin=R_PI-19
+Added Net: Name=MOSI_CAN
+Added Pin To Net: NetName=R_PWM_0 Pin=R_PI-32
+Added Net: Name=R_PWM_0
+Added Pin To Net: NetName=R_PWM_1 Pin=R_PI-33
+Added Net: Name=R_PWM_1
+Added Pin To Net: NetName=RXD Pin=R_PI-10
+Added Net: Name=RXD
+Added Pin To Net: NetName=SCK_CAN Pin=R_PI-23
+Added Net: Name=SCK_CAN
+Added Pin To Net: NetName=SCL Pin=R_PI-5
+Added Net: Name=SCL
+Added Pin To Net: NetName=SDA Pin=R_PI-3
+Added Net: Name=SDA
+Added Pin To Net: NetName=SS2 Pin=R_PI-26
+Added Net: Name=SS2
+Added Pin To Net: NetName=SS3 Pin=R_PI-29
+Added Net: Name=SS3
+Added Pin To Net: NetName=SS_CAN Pin=R_PI-24
+Added Net: Name=SS_CAN
+Added Pin To Net: NetName=TXD Pin=R_PI-8
+Added Net: Name=TXD
+Added Class: Name=vehicle electronics

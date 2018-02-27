@@ -1,0 +1,20 @@
+Removed Pin From Net: NetName=TX1 Pin=GPS-5
+Removed Pin From Net: NetName=RX1 Pin=GPS-6
+Removed Pin From Net: NetName=GND Pin=GPS-7
+Removed Pin From Net: NetName=5V Pin=GPS-8
+Removed Member From Class: ClassName=vehicle electronics Member=DS2
+Change Component Footprint: Designator=* Old Footprint=SO16 New Footprint=SOIC-16
+Added Component: Designator=button led(2PIN-5.08A)
+Added Component: Designator=GPS(GPS)
+Added Pin To Net: NetName=TX1 Pin=GPS-5
+Added Pin To Net: NetName=RX1 Pin=GPS-6
+Added Pin To Net: NetName=GND Pin=GPS-7
+Added Pin To Net: NetName=5V Pin=GPS-8
+Added Pin To Net: NetName=Netbutton led_1 Pin=button led-1
+Added Pin To Net: NetName=Netbutton led_1 Pin=R5-2
+Added Net: Name=Netbutton led_1
+Added Pin To Net: NetName=Netbutton led_2 Pin=button led-2
+Added Pin To Net: NetName=Netbutton led_2 Pin=Q1-2
+Added Net: Name=Netbutton led_2
+Added Member To Class: ClassName=vehicle electronics Member=Component button led H-2
+Added Member To Class: ClassName=vehicle electronics Member=Component GPS Ultimate GPS
