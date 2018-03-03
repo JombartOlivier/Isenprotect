@@ -1,0 +1,14 @@
+Output: Gerber Files
+Type  : Gerber
+From  : Variant [[No Variations]] of Project [vehicle electronics.PrjPcb]
+   Generated File[vehicle electronics.GTL]
+   Generated File[vehicle electronics.GBL]
+   Generated File[vehicle electronics.GM1]
+   Generated File[vehicle electronics.EXTREP]
+   Generated File[vehicle electronics.REP]
+
+
+Files Generated   : 5
+Documents Printed : 0
+
+Finished Output Generation At 15:24:35 On 2018/2/9

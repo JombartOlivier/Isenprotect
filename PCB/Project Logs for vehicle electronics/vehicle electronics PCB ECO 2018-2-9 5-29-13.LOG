@@ -1,0 +1,64 @@
+Removed Pin From Net: NetName=TX1 Pin=*-5
+Removed Pin From Net: NetName=RX1 Pin=*-6
+Removed Pin From Net: NetName=GND Pin=*-7
+Removed Pin From Net: NetName=5V Pin=*-8
+Removed Pin From Net: NetName=GND Pin=Buck-2
+Removed Pin From Net: NetName=GND Pin=Buck-3
+Removed Pin From Net: NetName=5V Pin=Buck-4
+Removed Pin From Net: NetName=GPIO27 Pin=D*-1
+Removed Pin From Net: NetName=TX1 Pin=D*-2
+Removed Pin From Net: NetName=RXD Pin=D*-3
+Removed Pin From Net: NetName=TXD Pin=D*-4
+Removed Pin From Net: NetName=RX2 Pin=D*-5
+Removed Pin From Net: NetName=TXD Pin=D*-15
+Removed Pin From Net: NetName=RX1 Pin=D*-16
+Removed Pin From Net: NetName=TX2 Pin=D*-17
+Removed Pin From Net: NetName=RXD Pin=D*-18
+Removed Pin From Net: NetName=GPIO17 Pin=D*-19
+Removed Pin From Net: NetName=5V Pin=D*-20
+Removed Pin From Net: NetName=GND Pin=Power-2
+Removed Member From Class: ClassName=vehicle electronics Member=Buck
+Removed Member From Class: ClassName=vehicle electronics Member=D*
+Removed Member From Class: ClassName=vehicle electronics Member=Power
+Removed Member From Class: ClassName=vehicle electronics Member=Power switch
+Change Component DesignItemId : Designator=* Old DesignItemId=Ultimate GPS New DesignItemId=SN74LVC157
+Change Component Footprint: Designator=* Old Footprint=GPS New Footprint=SO16
+Change Component Comment : Designator=R4 Old Comment=2.9K New Comment=18K
+Change Component Comment : Designator=* Old Comment=Ultimate GPS New Comment=SN74LVC157
+Added Component: Designator=DS2(LED0805G)
+Added Component: Designator=GPS(GPS)
+Added Component: Designator=Q1(SOT-23)
+Added Component: Designator=R5(R0805)
+Added Component: Designator=R6(R0805)
+Added Pin To Net: NetName=GPIO17 Pin=*-1
+Added Pin To Net: NetName=TX1 Pin=*-2
+Added Pin To Net: NetName=RXD Pin=*-4
+Added Pin To Net: NetName=TXD Pin=*-5
+Added Pin To Net: NetName=RX1 Pin=*-7
+Added Pin To Net: NetName=GND Pin=*-8
+Added Pin To Net: NetName=RX2 Pin=*-9
+Added Pin To Net: NetName=TXD Pin=*-10
+Added Pin To Net: NetName=RXD Pin=*-12
+Added Pin To Net: NetName=TX2 Pin=*-13
+Added Pin To Net: NetName=GND Pin=*-15
+Added Pin To Net: NetName=3.3V Pin=*-16
+Added Pin To Net: NetName=TX1 Pin=GPS-5
+Added Pin To Net: NetName=GND Pin=GPS-7
+Added Pin To Net: NetName=5V Pin=GPS-8
+Added Pin To Net: NetName=GPIO17 Pin=Q1-1
+Added Pin To Net: NetName=GND Pin=Q1-3
+Added Pin To Net: NetName=5V Pin=R5-1
+Added Pin To Net: NetName=GND Pin=R6-1
+Added Pin To Net: NetName=GPIO17 Pin=R6-2
+Added Pin To Net: NetName=5V Pin=Signal button-1
+Added Pin To Net: NetName=NetDS2_1 Pin=DS2-1
+Added Pin To Net: NetName=NetDS2_1 Pin=R5-2
+Added Net: Name=NetDS2_1
+Added Pin To Net: NetName=NetDS2_2 Pin=DS2-2
+Added Pin To Net: NetName=NetDS2_2 Pin=Q1-2
+Added Net: Name=NetDS2_2
+Added Member To Class: ClassName=vehicle electronics Member=Component DS2 LED_SOP
+Added Member To Class: ClassName=vehicle electronics Member=Component GPS Ultimate GPS
+Added Member To Class: ClassName=vehicle electronics Member=Component Q1 MOSFET-N
+Added Member To Class: ClassName=vehicle electronics Member=Component R5 1K
+Added Member To Class: ClassName=vehicle electronics Member=Component R6 10K

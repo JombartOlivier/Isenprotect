@@ -1,0 +1,14 @@
+- le nom de l'archive d¨¦pos¨¦e
+Vehicle-electronics
+
+- les dimensions approximatives du circuit (pour v¨¦rification apr¨¨s importation)
+57.2 x 86.5mm
+
+- le nombre d'exemplaires d¨¦sir¨¦s
+2
+
+- le mail du r¨¦f¨¦rent projet (encadrant)
+annemarie.kokosy@yncrea.fr
+
+- le mail du responsable technique, c'est ¨¤ dire la personne ¨¤ contacter en cas de probl¨¨me lors de la r¨¦alisation du circuit
+cong.chen@isen.yncrea.fr

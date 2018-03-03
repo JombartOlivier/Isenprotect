@@ -1,0 +1,6 @@
+Added Component: Designator=Buck*(Buck converter)
+Added Component: Designator=Power switch(2PIN-5.08A)
+Added Component: Designator=Signal button(3PIN-5.08A)
+Added Member To Class: ClassName=vehicle electronics Member=Component Buck* converter
+Added Member To Class: ClassName=vehicle electronics Member=Component Power switch H-2
+Added Member To Class: ClassName=vehicle electronics Member=Component Signal button H-3

@@ -1,0 +1,6 @@
+Added Component: Designator=sig1(Sigfox)
+Added Pin To Net: NetName=3.3V Pin=sig1-1
+Added Pin To Net: NetName=GND Pin=sig1-2
+Added Pin To Net: NetName=TX2 Pin=sig1-3
+Added Pin To Net: NetName=RX2 Pin=sig1-4
+Added Member To Class: ClassName=vehicle electronics Member=Component sig1 Sigfox

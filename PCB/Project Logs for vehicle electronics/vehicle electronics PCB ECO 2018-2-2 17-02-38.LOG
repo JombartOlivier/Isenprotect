@@ -1,0 +1,4 @@
+Added Component: Designator=Buck*(Buck converter)
+Added Component: Designator=Power(DC-6mm)
+Added Member To Class: ClassName=vehicle electronics Member=Component Buck* converter
+Added Member To Class: ClassName=vehicle electronics Member=Component Power Powerjack
